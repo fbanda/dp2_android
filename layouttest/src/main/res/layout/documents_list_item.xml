@@ -1,0 +1,47 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_tiny">
+    <ImageView
+        android:id="@+id/docs_item_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_tiny"
+        android:src="@drawable/ic_docs_pdf"/>
+    <ImageView
+        android:id="@+id/docs_item_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_menu_moreoverflow"/>
+    <LinearLayout
+        android:id="@+id/docs_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/docs_item_icon"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/docs_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nombre documento laaargo.ext"
+            android:textAppearance="@style/text_appearance_large_dark"
+            android:singleLine="true"
+            android:layout_marginRight="25dp"/>
+        <TextView
+            android:id="@+id/docs_item_size_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1KB - Hace 1 día"
+            android:textAppearance="@style/text_appearance_medium_dark_soft"
+            android:singleLine="true"
+            android:layout_marginRight="25dp"/>
+        <!--'marginRight' logra que el texto no se dibuje encima del ImageView "ic_menu_overflow"-->
+    </LinearLayout>
+
+    <!--El 'src' y ambos 'text' son sólo muestras-->
+</RelativeLayout>

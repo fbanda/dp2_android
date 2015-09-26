@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="drawer_width">240dp</dimen>
+    <dimen name="drawer_padding">@dimen/margin_tiny</dimen>
+
+    <dimen name="button_large">200dp</dimen>
+    <dimen name="button_medium">150dp</dimen>
+
+    <dimen name="edit_text_large">240dp</dimen>
+    <dimen name="edit_text_padding">@dimen/margin_small</dimen>
+
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_medium">15dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_tiny">5dp</dimen>
+    <dimen name="margin_top">@dimen/margin_large</dimen>
+
+    <dimen name="text_size_giant">26sp</dimen>
+    <dimen name="text_size_large">22sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_small">14sp</dimen>
+
+</resources>

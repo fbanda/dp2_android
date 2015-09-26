@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_small">
+
+    <!--ImageView
+        android:id="@+id/kids_item_photo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
+
+        android:src="@android:drawable/ic_menu_myplaces"
+
+
+        /-->
+
+    <LinearLayout
+        android:id="@+id/kids_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/kids_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:text="Nombre del niño"
+            android:textAppearance="@style/text_appearance_large_dark"
+            android:singleLine="true"
+            android:layout_marginRight="25dp"
+            />
+        <TextView
+            android:id="@+id/kids_item_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/kids_item_name"
+            android:text="5 años"
+            android:textAppearance="@style/text_appearance_medium_dark_soft"
+            android:singleLine="true"
+            android:layout_marginRight="25dp"
+            />
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/kids_item_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@android:drawable/checkbox_on_background"/>
+</RelativeLayout>

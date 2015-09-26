@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <item name="status_bar" type="color">#0078A0</item>
+
+    <item name="toolbar_background" type="color">#0099cc</item>
+    <item name="drawer_background" type="color">@color/main_background</item>
+    <item name="light_text" type="color">@android:color/white</item>
+
+    <item name="main_background" type="color">#F0FFFF</item>
+    <item name="dark_text" type="color">#0099cc</item>
+    <item name="dark_soft_text" type="color">#60B9D6</item>
+
+    <item name="edit_text_hint" type="color">#7bd3f0</item>
+    <item name="edit_text_text" type="color">#000000</item>
+    <item name="edit_text_underline_normal" type="color">@color/edit_text_hint</item>
+    <item name="edit_text_underline_highlight" type="color">@color/toolbar_background</item>
+
+    <item name="list_view_divider" type="color">#93E0FA</item>
+
+</resources>

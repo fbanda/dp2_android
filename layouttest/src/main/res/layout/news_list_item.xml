@@ -1,0 +1,68 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_tiny">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+        <ImageView
+            android:id="@+id/news_item_pic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:adjustViewBounds="true"/>
+        <TextView
+            android:id="@+id/news_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/news_item_pic"
+            android:textAppearance="@style/text_appearance_large_dark"
+            android:text="Paseo pinoteco al parque de las leyendas"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/news_item_title"
+            android:padding="@dimen/margin_tiny">
+            <ImageView
+                android:id="@+id/news_item_author_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/margin_tiny"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/news_item_author_icon"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/news_item_author_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Manuel Chumpitaz"
+                    android:textAppearance="@style/text_appearance_medium_dark_soft"
+                    android:singleLine="true"
+                    android:layout_marginRight="25dp"/>
+                <TextView
+                    android:id="@+id/news_item_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hace 10 minutos"
+                    android:textAppearance="@style/text_appearance_small_dark_soft"
+                    android:singleLine="true"
+                    android:layout_marginRight="25dp"/>
+                <!--'marginRight' logra que el texto no se dibuje encima del ImageView "ic_menu_overflow"-->
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/news_item_icon_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_star_empty"/>
+        </RelativeLayout>
+        <!--Todos los 'src' y 'text' son sólo muestras-->
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Layout Test</string>
+
+    <!-- Drawer menu -->
+    <string name="navigation_drawer_open">Abrir menú</string>
+    <string name="navigation_drawer_close">Cerrar menú</string>
+
+    <string name="menu_login">Login</string>
+    <string name="menu_noticias">Noticias</string>
+    <string name="menu_sesiones">Sesiones</string>
+    <string name="menu_documentos">Documentos</string>
+    <string name="menu_blog">Blog</string>
+    <string name="menu_pagos">Pagos</string>
+
+    <!-- Login -->
+    <string name="login_message">Ingresa a tu cuenta</string>
+    <string name="login_email_hint">Correo electrónico</string>
+    <string name="login_password_hint">Contraseña</string>
+    <string name="login_btn_enter">Ingresar</string>
+    <string name="login_btn_recover_password">Recuperar contraseña</string>
+    <string name="login_footer">© 2015 Keinions. Todos los derechos reservados.\nFooter de texto largo largo largo blablabla</string>
+
+    <!-- Documentos -->
+    <string name="documents_none">No se encontraron documentos.</string>
+    <string name="documents_size_date">%1$s - %2$s</string>
+    <string name="documents_menu_view">Ver</string>
+    <string name="documents_menu_download">Descargar</string>
+    <string name="documents_menu_check_views">Revisar vistas</string>
+    <string name="documents_menu_search">Buscar documentos</string>
+
+    <!-- Noticias -->
+    <string name="news_none">No se encontraron noticias.</string>
+    <string name="news_menu_favorite">Agregar a favoritos</string>
+    <string name="news_menu_search">Buscar noticias</string>
+
+    <!-- Noticias detalle -->
+    <string name="news_article_author_date">%1$s, %2$s</string>
+    <string name="news_article_comment">Comentar en la página Web</string>
+    <string name="news_article_share">Compartir en Facebook</string>
+    <string name="article_example">El Ministerio de la Mujer y Poblaciones Vulnerables (MIMP), destacó la aprobación del reglamento de la Ley General del Voluntario que busca promover la solidaridad y conciencia social entre los peruanos y peruanas, y que establece diversos beneficios de carácter social, salud y educativos a favor de las personas que realicen ete tipo de actividades.\n\nEl reglamento de la ley indica que toda persona mayor de 14 años podrá ser voluntaria siempre y cuando</string>
+
+    <!-- Asistencia -->
+    <string name="volunteers_none">No se encontraron voluntarios.</string>
+
+    <!-- Sesiones -->
+    <string name="sessions_none">No se encontraron sesiones.</string>
+    <string name="sessions_menu_docs">Ver documentos</string>
+    <string name="sessions_menu_map">Ver mapa</string>
+    <string name="sessions_menu_comment">Registrar comentarios</string>
+    <string name="sessions_menu_attendance">Marcar asistencia</string>
+
+    <!-- Niños -->
+    <string name="kids_none">No se encontraron niños.</string>
+    <string name="kids_age">%d años</string>
+
+    <array name="spinner_age">
+        <item>Edad igual a</item>
+        <item>Edad menor a</item>
+        <item>Edad mayor a</item>
+    </array>
+</resources>
