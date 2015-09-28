@@ -336,6 +336,7 @@ public class DetailActivity extends AppCompatActivity {
 
             File file = new File(path);
             if(!file.exists()){
+                file.getParentFile().mkdirs();
                 file.createNewFile();
             }
             FileOutputStream os = new FileOutputStream(file);
@@ -354,6 +355,7 @@ public class DetailActivity extends AppCompatActivity {
                 return path;
             }
         }catch(IOException e){
+            Log.e("imgs", "", e);
         }
         return null;
     }
