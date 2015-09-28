@@ -52,15 +52,32 @@ import java.util.GregorianCalendar;
  */
 public class DetailActivity extends AppCompatActivity {
 
+    public static final int FRAGMENT_NOTICIAS = 0;
+    public static final int FRAGMENT_SESIONES = 1;
+    public static final int FRAGMENT_DOCUMENTOS = 2;
+    public static final int FRAGMENT_BLOG = 3;
+    public static final int FRAGMENT_PAGOS = 4;
+
+    public static final int FRAGMENT_LOGIN = 5;
+    public static final int FRAGMENT_DETALLE_NOTICIAS = 6;
+    public static final int FRAGMENT_ASISTENCIA = 7;
+    public static final int FRAGMENT_COMENTARIOS = 8;
+
     DrawerLayout mDrawerLayout;
     ListView mDrawerList;
     ActionBarDrawerToggle mDrawerToggle;
     int selectedLayout;
+    int toolbarMenu;
 
     private FragmentManager.OnBackStackChangedListener backStackListener = new FragmentManager.OnBackStackChangedListener() {
         @Override
         public void onBackStackChanged() {
-            setNavIcon();
+            int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+            boolean noStack = backStackEntryCount == 0;
+            setNavIcon(noStack);
+            if(noStack){
+                setTitle(getTitle(selectedLayout));
+            }
         }
     };
 
@@ -69,17 +86,13 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.base);
 
-        ArrayList<Integer> layoutsList = new ArrayList<>();
         ArrayList<DrawerItem> list = new ArrayList<>();
-        list.add(new DrawerItem(getResources().getString(R.string.menu_login), android.R.drawable.ic_menu_info_details));
-        list.add(new DrawerItem(getResources().getString(R.string.menu_noticias), android.R.drawable.ic_menu_gallery));
-        list.add(new DrawerItem(getResources().getString(R.string.menu_sesiones), android.R.drawable.ic_menu_agenda));
-        list.add(new DrawerItem(getResources().getString(R.string.menu_documentos), android.R.drawable.ic_menu_view));
-        list.add(new DrawerItem(getResources().getString(R.string.menu_blog), android.R.drawable.ic_menu_delete));
-        list.add(new DrawerItem(getResources().getString(R.string.menu_pagos), android.R.drawable.ic_menu_my_calendar));
-        list.add(new DrawerItem(getResources().getString(R.string.menu_noticias), android.R.drawable.ic_menu_gallery));
-        list.add(new DrawerItem("Asistencia", android.R.drawable.ic_menu_agenda));
-        list.add(new DrawerItem("Comentarios", android.R.drawable.ic_menu_agenda));
+        list.add(new DrawerItem(getTitle(FRAGMENT_NOTICIAS), android.R.drawable.ic_menu_gallery));
+        list.add(new DrawerItem(getTitle(FRAGMENT_SESIONES), android.R.drawable.ic_menu_agenda));
+        list.add(new DrawerItem(getTitle(FRAGMENT_DOCUMENTOS), android.R.drawable.ic_menu_view));
+        list.add(new DrawerItem(getTitle(FRAGMENT_BLOG), android.R.drawable.ic_menu_delete));
+        list.add(new DrawerItem(getTitle(FRAGMENT_PAGOS), android.R.drawable.ic_menu_my_calendar));
+        list.add(new DrawerItem(getTitle(FRAGMENT_LOGIN), android.R.drawable.ic_menu_info_details));
 
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
         mDrawerList.setAdapter(new DrawerAdapter(this, list));
@@ -96,12 +109,32 @@ public class DetailActivity extends AppCompatActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         getSupportFragmentManager().addOnBackStackChangedListener(backStackListener);
 
-        selectItem(0, "Login");
+        selectItem(FRAGMENT_LOGIN);
     }
 
-    protected void setNavIcon() {
-        int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
-        mDrawerToggle.setDrawerIndicatorEnabled(backStackEntryCount == 0);
+    public String getTitle(int fragmentId){
+        int id = 0;
+        switch(fragmentId){
+            case FRAGMENT_NOTICIAS: id = R.string.menu_noticias; break;
+            case FRAGMENT_SESIONES: id = R.string.menu_sesiones; break;
+            case FRAGMENT_DOCUMENTOS: id = R.string.menu_documentos; break;
+            case FRAGMENT_BLOG: id = R.string.menu_blog; break;
+            case FRAGMENT_PAGOS: id = R.string.menu_pagos; break;
+
+            case FRAGMENT_LOGIN: id = R.string.app_name; break;
+            case FRAGMENT_DETALLE_NOTICIAS: id = R.string.menu_noticias; break;
+            case FRAGMENT_ASISTENCIA: id = R.string.title_asistencia; break;
+            case FRAGMENT_COMENTARIOS: id = R.string.title_comentarios; break;
+        }
+        if(id != 0){
+            return getResources().getString(id);
+        }else{
+            return "";
+        }
+    }
+
+    protected void setNavIcon(boolean noStack) {
+        mDrawerToggle.setDrawerIndicatorEnabled(noStack);
         mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,28 +148,52 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu){
         menu.clear();
-        int newMenu;
-        switch(selectedLayout){
-            case 1: newMenu = R.menu.news_menu_toolbar; break;
-            case 3: newMenu = R.menu.docs_menu_toolbar; break;
-            case 6: newMenu = R.menu.news_article_menu_toolbar; break;
-            default: newMenu = 0; break;
-        }
-        if(newMenu != 0) {
+        if(toolbarMenu != 0){
             MenuInflater inflater = getMenuInflater();
-            inflater.inflate(newMenu, menu);
+            inflater.inflate(toolbarMenu, menu);
         }
         return true;
     }
 
-    public void selectItem(int position, CharSequence title){
+    public int getMenu(int fragmentId){
+        switch(fragmentId){
+            case FRAGMENT_NOTICIAS: return R.menu.news_menu_toolbar;
+            case FRAGMENT_DOCUMENTOS: return R.menu.docs_menu_toolbar;
+            case FRAGMENT_DETALLE_NOTICIAS: return R.menu.news_article_menu_toolbar;
+            default: return 0;
+        }
+    }
+
+    public void changeFragment(Fragment fragment, String toolbarTitle, int toolbarMenu){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        if(toolbarTitle != null){
+            Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_actionbar);
+            toolbar.setTitle(toolbarTitle);
+        }
+        this.toolbarMenu = toolbarMenu;
+        invalidateOptionsMenu();
+    }
+
+    public void addFragment(Fragment fragment, String toolbarTitle, int toolbarMenu){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
+        if(toolbarTitle != null){
+            Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_actionbar);
+            toolbar.setTitle(toolbarTitle);
+        }
+        this.toolbarMenu = toolbarMenu;
+        invalidateOptionsMenu();
+    }
+
+    private void selectItem(int position){
         Bundle args = null;
         Fragment fragment;
         switch(position){
             default:
                 fragment = new LoginFragment();
                 break;
-            case 1:
+            case FRAGMENT_NOTICIAS:
                 args = new Bundle();
                 ArrayList<NewsItem> news = new ArrayList<>();
                 Calendar calendar = new GregorianCalendar(2015, 8, 25, 0, 31);
@@ -166,7 +223,7 @@ public class DetailActivity extends AppCompatActivity {
                 args.putSerializable(NewsFragment.NEWS_ARG, news);
                 fragment = new NewsFragment();
                 break;
-            case 2:
+            case FRAGMENT_SESIONES:
                 args = new Bundle();
                 ArrayList<SessionItem> sessions = new ArrayList<>();
                 calendar = new GregorianCalendar(2015, 8, 16, 16, 00);
@@ -183,7 +240,7 @@ public class DetailActivity extends AppCompatActivity {
                 args.putSerializable(SessionFragment.SESSION_ARG, sessions);
                 fragment = new SessionFragment();
                 break;
-            case 3:
+            case FRAGMENT_DOCUMENTOS:
                 args = new Bundle();
                 ArrayList<DocumentsItem> documents = new ArrayList<>();
                 calendar = new GregorianCalendar(2015, 8, 22, 15, 21);
@@ -198,96 +255,20 @@ public class DetailActivity extends AppCompatActivity {
                 args.putSerializable(DocumentsFragment.DOCUMENTS_ARG, documents);
                 fragment = new DocumentsFragment();
                 break;
-            case 6:
-                args = new Bundle();
-                calendar = new GregorianCalendar(2015, 8, 25, 0, 37);
-                NewsArticleItem article = new NewsArticleItem(
-                        1001,
-                        "https://fbcdn-sphotos-a-a.akamaihd.net/hphotos-ak-xat1/v/t1.0-9/13779_10153228555392486_8679903887061635913_n.jpg?oh=00b977b776d2b46e53c88f229bc38250&oe=5668F7B7&__gda__=1453937731_0addbe5c62688f1ca9aa12cef23593eb",
-                        "Paseo pinoteco al parque de las leyendas",
-                        "Manuel", calendar.getTime().getTime(),
-                        getResources().getString(R.string.article_example)
-                );
-                args.putSerializable(NewsArticleFragment.NEWS_ARTICLE_ARG, article);
-                fragment = new NewsArticleFragment();
-                break;
-            case 7:
-                args = new Bundle();
-                ArrayList<AttendanceItem> volunteers = new ArrayList<>();
-                volunteers.add(new AttendanceItem(
-                        2001,
-                        "https://scontent-mia1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10392539_10153410963797486_885580920541938912_n.png?oh=f05a7187f83b64568b81f9a023552651&oe=56A5DF4D",
-                        "Alonso Alvarez", false));
-                volunteers.add(new AttendanceItem(
-                        2001,
-                        "https://scontent-mia1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10392539_10153410963797486_885580920541938912_n.png?oh=f05a7187f83b64568b81f9a023552651&oe=56A5DF4D",
-                        "Fernando Banda", false));
-                volunteers.add(new AttendanceItem(
-                        2001,
-                        "https://scontent-mia1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10392539_10153410963797486_885580920541938912_n.png?oh=f05a7187f83b64568b81f9a023552651&oe=56A5DF4D",
-                        "Luis Barcena", false));
-                volunteers.add(new AttendanceItem(
-                        2001,
-                        "https://scontent-mia1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10392539_10153410963797486_885580920541938912_n.png?oh=f05a7187f83b64568b81f9a023552651&oe=56A5DF4D",
-                        "Daekef Abarca", false));
-                volunteers.add(new AttendanceItem(
-                        2001,
-                        "https://scontent-mia1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10392539_10153410963797486_885580920541938912_n.png?oh=f05a7187f83b64568b81f9a023552651&oe=56A5DF4D",
-                        "Gloria Cisneros", false));
-                volunteers.add(new AttendanceItem(
-                        2001,
-                        "https://scontent-mia1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10392539_10153410963797486_885580920541938912_n.png?oh=f05a7187f83b64568b81f9a023552651&oe=56A5DF4D",
-                        "Diego Malpartida", false));
-                volunteers.add(new AttendanceItem(
-                        2001,
-                        "https://scontent-mia1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10392539_10153410963797486_885580920541938912_n.png?oh=f05a7187f83b64568b81f9a023552651&oe=56A5DF4D",
-                        "Gabriel Tovar", false));
-                volunteers.add(new AttendanceItem(
-                        2001,
-                        "https://scontent-mia1-1.xx.fbcdn.net/hphotos-xaf1/v/t1.0-9/10392539_10153410963797486_885580920541938912_n.png?oh=f05a7187f83b64568b81f9a023552651&oe=56A5DF4D",
-                        "Luis Incio", false));
-                Collections.sort(volunteers);
-                args.putSerializable(AttendanceFragment.ATTENDANCE_ARG, volunteers);
-                fragment = new AttendanceFragment();
-                break;
-            case 8:
-                args = new Bundle();
-                ArrayList<KidItem> kids = new ArrayList<>();
-                kids.add(new KidItem("Eduardo Arenas", 12, true));
-                kids.add(new KidItem("Julio Castillo", 12, false));
-                kids.add(new KidItem("Juan Reyes", 12, true));
-                kids.add(new KidItem("Kevin Brown", 12, true));
-                kids.add(new KidItem("Robert Aduviri", 12, false));
-                Collections.sort(kids);
-                args.putSerializable(KidsFragment.KIDS_ARG, kids);
-                fragment = new KidsFragment();
-                break;
         }
-        if(args != null) {
+        if(args != null){
             fragment.setArguments(args);
         }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        if(position < 6){
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-        }else{
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).addToBackStack(null).commit();
-        }
-
         mDrawerList.setItemChecked(position, true);
         mDrawerLayout.closeDrawer(mDrawerList);
-
-        if(title != null){
-            Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_actionbar);
-            toolbar.setTitle(title);
-        }
         selectedLayout = position;
-        invalidateOptionsMenu();
+        changeFragment(fragment, getTitle(selectedLayout), getMenu(selectedLayout));
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener{
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItem(position, ((TextView) view.findViewById(R.id.list_item_name)).getText());
+            selectItem(position);
         }
     }
 

@@ -16,7 +16,7 @@ import com.example.dp2.layouttest.com.example.dp2.layouttest.lists.NewsArticleIt
 /**
  * Created by Fernando on 23/09/2015.
  */
-public class NewsArticleFragment extends Fragment{
+public class NewsArticleFragment extends BaseFragment{
 
     public static final String NEWS_ARTICLE_ARG = "news_article_arg";
 
@@ -25,10 +25,13 @@ public class NewsArticleFragment extends Fragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.news_detail, container, false);
+    public int getLayout(){
+        return R.layout.news_detail;
+    }
 
-        NewsArticleItem article = (NewsArticleItem)getArguments().getSerializable(NEWS_ARTICLE_ARG);
+    @Override
+    public void prepareView(View rootView, Bundle args, Bundle savedInstanceState){
+        NewsArticleItem article = (NewsArticleItem)args.getSerializable(NEWS_ARTICLE_ARG);
 
         ImageView pic = (ImageView)rootView.findViewById(R.id.news_detail_pic);
         setImage(pic, article.getPicURL(), "news_" + article.getPicId() + ".jpg");
@@ -40,12 +43,6 @@ public class NewsArticleFragment extends Fragment{
         date.setText(getResources().getString(R.string.news_article_author_date, article.getAuthorName(), formattedDate));
         TextView content = (TextView)rootView.findViewById(R.id.news_detail_content);
         content.setText(article.getContent());
-
-        return rootView;
-    }
-
-    private void setImage(ImageView v, String URL, String title){
-        ((DetailActivity)getContext()).setImage(v, URL, title);
     }
 
 }

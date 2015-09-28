@@ -4,7 +4,7 @@
     android:padding="@dimen/drawer_padding">
 
     <ImageView
-        android:id="@+id/list_item_icon"
+        android:id="@+id/drawer_list_item_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -12,11 +12,11 @@
         android:layout_marginRight="@dimen/margin_medium"
         android:src="@android:drawable/ic_menu_help"/>
     <TextView
-        android:id="@+id/list_item_name"
+        android:id="@+id/drawer_list_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/list_item_icon"
+        android:layout_toRightOf="@+id/drawer_list_item_icon"
         android:text="Opción"
         android:textAppearance="@style/text_appearance_medium_dark"/>
 

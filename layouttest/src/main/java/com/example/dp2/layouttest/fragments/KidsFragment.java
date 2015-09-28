@@ -16,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Fernando on 23/09/2015.
  */
-public class KidsFragment extends Fragment{
+public class KidsFragment extends BaseFragment{
 
     public static final String KIDS_ARG = "kids_arg";
 
@@ -25,17 +25,18 @@ public class KidsFragment extends Fragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.kids, container, false);
+    public int getLayout(){
+        return R.layout.kids;
+    }
 
-        ArrayList<KidItem> kids = (ArrayList<KidItem>)getArguments().getSerializable(KIDS_ARG);
-        KidAdapter adapter = new KidAdapter(getContext(), kids);
+    @Override
+    public void prepareView(View rootView, Bundle args, Bundle savedInstanceState){
+        ArrayList<KidItem> kids = (ArrayList<KidItem>)args.getSerializable(KIDS_ARG);
+        KidAdapter adapter = new KidAdapter(getContext(), this, kids);
 
         ListView newsList = (ListView)rootView.findViewById(R.id.kids_list);
         newsList.setAdapter(adapter);
         newsList.setEmptyView(rootView.findViewById(R.id.empty_kids_list));
-
-        return rootView;
     }
 
 }

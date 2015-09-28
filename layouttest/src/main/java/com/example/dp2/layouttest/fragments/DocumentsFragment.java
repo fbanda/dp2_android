@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Fernando on 23/09/2015.
  */
-public class DocumentsFragment extends Fragment{
+public class DocumentsFragment extends BaseFragment{
 
     public static final String DOCUMENTS_ARG = "docs_arg";
 
@@ -28,17 +28,18 @@ public class DocumentsFragment extends Fragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.documents, container, false);
+    public int getLayout(){
+        return R.layout.documents;
+    }
 
-        ArrayList<DocumentsItem> documents = (ArrayList<DocumentsItem>)getArguments().getSerializable(DOCUMENTS_ARG);
-        DocumentsAdapter adapter = new DocumentsAdapter(getContext(), documents);
+    @Override
+    public void prepareView(View rootView, Bundle args, Bundle savedInstanceState){
+        ArrayList<DocumentsItem> documents = (ArrayList<DocumentsItem>)args.getSerializable(DOCUMENTS_ARG);
+        DocumentsAdapter adapter = new DocumentsAdapter(getContext(), this, documents);
 
         ListView docsList = (ListView)rootView.findViewById(R.id.docs_list);
         docsList.setAdapter(adapter);
         docsList.setEmptyView(rootView.findViewById(R.id.empty_docs_list));
-
-        return rootView;
     }
 
 }

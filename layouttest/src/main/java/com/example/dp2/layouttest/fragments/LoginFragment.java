@@ -16,17 +16,15 @@ import java.util.ArrayList;
 /**
  * Created by Fernando on 23/09/2015.
  */
-public class LoginFragment extends Fragment{
+public class LoginFragment extends BaseFragment{
 
     public LoginFragment(){
         super();
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.login, container, false);
-
-        return rootView;
+    public int getLayout(){
+        return R.layout.login;
     }
 
 }

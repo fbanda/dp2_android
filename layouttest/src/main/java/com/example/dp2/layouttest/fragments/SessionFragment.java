@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Fernando on 23/09/2015.
  */
-public class SessionFragment extends Fragment{
+public class SessionFragment extends BaseFragment{
 
     public static final String SESSION_ARG = "session_arg";
 
@@ -27,17 +27,18 @@ public class SessionFragment extends Fragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.sessions, container, false);
+    public int getLayout(){
+        return R.layout.sessions;
+    }
 
-        ArrayList<SessionItem> sessions = (ArrayList<SessionItem>)getArguments().getSerializable(SESSION_ARG);
-        SessionAdapter adapter = new SessionAdapter(getContext(), sessions);
+    @Override
+    public void prepareView(View rootView, Bundle args, Bundle savedInstanceState){
+        ArrayList<SessionItem> sessions = (ArrayList<SessionItem>)args.getSerializable(SESSION_ARG);
+        SessionAdapter adapter = new SessionAdapter(getContext(), this, sessions);
 
         ListView newsList = (ListView)rootView.findViewById(R.id.sessions_list);
         newsList.setAdapter(adapter);
         newsList.setEmptyView(rootView.findViewById(R.id.empty_sessions_list));
-
-        return rootView;
     }
 
 }

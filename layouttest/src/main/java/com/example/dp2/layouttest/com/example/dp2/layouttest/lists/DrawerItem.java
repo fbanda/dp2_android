@@ -1,7 +1,9 @@
 package com.example.dp2.layouttest.com.example.dp2.layouttest.lists;
 
 
-public class DrawerItem {
+import java.io.Serializable;
+
+public class DrawerItem implements Serializable {
     private String name;
     private int iconId;
 

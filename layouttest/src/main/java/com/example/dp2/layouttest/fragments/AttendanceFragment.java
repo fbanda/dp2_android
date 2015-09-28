@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by Fernando on 23/09/2015.
  */
-public class AttendanceFragment extends Fragment{
+public class AttendanceFragment extends BaseFragment{
 
     public static final String ATTENDANCE_ARG = "attendance_arg";
 
@@ -27,17 +27,18 @@ public class AttendanceFragment extends Fragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View rootView = inflater.inflate(R.layout.attendance, container, false);
+    public int getLayout(){
+        return R.layout.attendance;
+    }
 
-        ArrayList<AttendanceItem> volunteers = (ArrayList<AttendanceItem>)getArguments().getSerializable(ATTENDANCE_ARG);
-        AttendanceAdapter adapter = new AttendanceAdapter(getContext(), volunteers);
+    @Override
+    public void prepareView(View rootView, Bundle args, Bundle savedInstanceState){
+        ArrayList<AttendanceItem> volunteers = (ArrayList<AttendanceItem>)args.getSerializable(ATTENDANCE_ARG);
+        AttendanceAdapter adapter = new AttendanceAdapter(getContext(), this, volunteers);
 
         ListView newsList = (ListView)rootView.findViewById(R.id.attendance_list);
         newsList.setAdapter(adapter);
         newsList.setEmptyView(rootView.findViewById(R.id.empty_attendance_list));
-
-        return rootView;
     }
 
 }

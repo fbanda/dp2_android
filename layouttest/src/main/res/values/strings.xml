@@ -1,16 +1,18 @@
 <resources>
-    <string name="app_name">Layout Test</string>
+    <string name="app_name">AFI Perú</string>
 
     <!-- Drawer menu -->
     <string name="navigation_drawer_open">Abrir menú</string>
     <string name="navigation_drawer_close">Cerrar menú</string>
 
-    <string name="menu_login">Login</string>
     <string name="menu_noticias">Noticias</string>
     <string name="menu_sesiones">Sesiones</string>
     <string name="menu_documentos">Documentos</string>
     <string name="menu_blog">Blog</string>
     <string name="menu_pagos">Pagos</string>
+
+    <string name="title_asistencia">Asistencia</string>
+    <string name="title_comentarios">Comentarios</string>
 
     <!-- Login -->
     <string name="login_message">Ingresa a tu cuenta</string>
